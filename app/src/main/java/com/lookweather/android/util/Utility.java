@@ -2,9 +2,11 @@ package com.lookweather.android.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.lookweather.android.db.City;
 import com.lookweather.android.db.County;
 import com.lookweather.android.db.Province;
+import com.lookweather.android.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,5 +79,20 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    /**
+     * 将返回的JSON数据解析成Weather实体类
+     */
+    public static Weather handleWeatherResponse(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
