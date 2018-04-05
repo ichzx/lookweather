@@ -51,7 +51,21 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView aqiText;
 
+    private TextView qltyText;
+
     private TextView pm25Text;
+
+    private TextView humidText;
+
+    private TextView windDir;
+
+    private TextView windSpd;
+
+    private TextView visualText;
+
+    private TextView pcpnText;
+
+    private TextView presText;
 
     private TextView comfortText;
 
@@ -82,9 +96,16 @@ public class WeatherActivity extends AppCompatActivity {
         weatherInfoText = (TextView) findViewById(R.id.weather_info);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
+        qltyText = (TextView) findViewById(R.id.aqi_qlty);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
+        humidText = (TextView) findViewById(R.id.humid_text);
+        windDir = (TextView) findViewById(R.id.wind_dir);
+        windSpd = (TextView) findViewById(R.id.wind_spd);
+        visualText = (TextView) findViewById(R.id.visual_text);
+        pcpnText = (TextView) findViewById(R.id.precipitation_text);
+        presText = (TextView) findViewById(R.id.pressure_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
-        carWashText = (TextView) findViewById(R.id.carwash_text);
+        carWashText = (TextView) findViewById(R.id.carWash_text);
         sportText = (TextView) findViewById(R.id.sport_text);
         bingPicImg = (ImageView) findViewById(R.id.bing_pic_img);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
@@ -221,10 +242,17 @@ public class WeatherActivity extends AppCompatActivity {
         if (weather.aqi != null){
             aqiText.setText(weather.aqi.city.aqi);
             pm25Text.setText(weather.aqi.city.pm25);
+            qltyText.setText(weather.aqi.city.qlty);
         }
         String comfort = "舒适度：" + weather.suggestion.comfort.comfortInfo;
         String carwash = "洗车指数：" + weather.suggestion.carWash.carWashInfo;
         String sport = "运动建议：" + weather.suggestion.sport.sportInfo;
+        humidText.setText(weather.now.humid+"%");
+        windDir.setText(weather.now.windDir);
+        windSpd.setText(weather.now.windSpd+"km/h");
+        pcpnText.setText(weather.now.precipitation+"mm");
+        presText.setText(weather.now.pressure+"hPa");
+        visualText.setText(weather.now.visual+"km");
         comfortText.setText(comfort);
         carWashText.setText(carwash);
         sportText.setText(sport);
